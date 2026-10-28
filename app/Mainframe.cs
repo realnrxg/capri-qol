@@ -663,7 +663,7 @@ namespace CapriDesktop
 
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
-            if (!Quitting && e.CloseReason == CloseReason.UserClosing) { e.Cancel = true; WindowState = FormWindowState.Minimized; }
+            if (!Quitting && e.CloseReason == CloseReason.UserClosing) { e.Cancel = true; CancelKeys(); Hide(); }
             base.OnFormClosing(e);
         }
 

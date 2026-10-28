@@ -10173,8 +10173,11 @@ namespace CapriDesktop
                             else checks.Add("LIMIT free voice synthesis not run; the voice pack is not installed on this PC");
                             checks.Add("PASS voice: key sealed with DPAPI, tags stripped, errors read, real HTTP round trips against a fake ElevenLabs (401 explained, audio fetched), WAV cleanup, mouth from the audio, listing parse, voice and model picks, a blank Voice ID asks for one, forget");
                             mainframe.Close();
-                            if (mainframe.IsDisposed || !mainframe.Visible || mainframe.WindowState != FormWindowState.Minimized) throw new Exception("Closing the Mainframe quit instead of minimizing.");
-                            checks.Add("PASS Mainframe starts in the taskbar, a second launch opens it, it picks a model, and its close button minimizes it");
+                            if (mainframe.IsDisposed || mainframe.Visible) throw new Exception("Closing the Mainframe did not hide it to the tray.");
+                            mainframe.Restore();
+                            if (!mainframe.Visible || mainframe.WindowState != FormWindowState.Normal) throw new Exception("Mainframe could not be reopened from the tray.");
+                            mainframe.Hide();
+                            checks.Add("PASS Mainframe starts in the taskbar, a second launch opens it, it picks a model, and its close button hides it to the tray and allows reopening");
                             Think = delegate(string words) { thoughts++; return words == "hi" ? "Hey choom! Net's been quiet, too quiet. Time to stir up some trouble." : "Huh?"; };
                             Point body = Point.Empty;
                             for (int y = 0; y < frame.Height && body.IsEmpty; y += 4) for (int x = 0; x < frame.Width; x += 4) if (frame.GetPixel(x, y).A == 255) { body = new Point(x, y); break; }
