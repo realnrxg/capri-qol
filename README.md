@@ -10,7 +10,7 @@ Rework of [Capri Desktop](https://github.com/lachydotmcg/capri-desktop).
 4. Mischief mode added to Mainframe.
 5. Installer location picker added.
 6. `Uninstall.exe` fixed.
-7  X now closes to the tray.
+7.  X now closes to the tray.
 
 ## VoiceStudio
 
